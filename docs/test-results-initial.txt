@@ -1,0 +1,20 @@
+
+> smart-campus-room-checker-initial@1.0.0 test
+> node --test --test-reporter=spec
+
+✔ AC1: end before start is rejected (0.868649ms)
+✔ AC1: start in the past is rejected (0.133334ms)
+✔ AC2: exactly 120 minutes is accepted (0.200524ms)
+✔ AC2: 121 minutes is rejected (0.182452ms)
+✔ AC3: blocked room is never available (0.123521ms)
+✔ AC4: touching interval (11:00–12:00 after 10:00–11:00) is allowed (0.107671ms)
+✔ AC4: overlapping interval (10:30–11:30) is rejected (0.223984ms)
+✔ AC5: booking data is not mutated by a check (0.2882ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.634366
