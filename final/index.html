@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Campus room availability</title>
+<link rel="stylesheet" href="css/styles.css">
+<script type="module" src="src/ui/app.js"></script>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Find a free room</h1>
+    <p class="now">Campus time: Monday, 9 November 2026, 09:00</p>
+  </header>
+
+  <form id="form" novalidate>
+    <fieldset class="needs">
+      <legend>What you need</legend>
+      <label class="field">Attendees
+        <input type="number" name="attendees" min="0" value="0" inputmode="numeric">
+      </label>
+      <div class="field">Equipment
+        <div id="equipment" class="chips"></div>
+      </div>
+    </fieldset>
+
+    <fieldset class="rooms-set">
+      <legend>Room <span id="match-count" class="count"></span></legend>
+      <div id="rooms" class="rooms"></div>
+    </fieldset>
+
+    <fieldset class="when">
+      <legend>When</legend>
+      <label class="field">Date <input type="date" name="date"></label>
+      <label class="field">Start <input type="time" name="start" step="300"></label>
+      <label class="field">End <input type="time" name="end" step="300"></label>
+      <p id="hint" class="hint" aria-live="polite"></p>
+      <button type="submit">Check availability</button>
+    </fieldset>
+  </form>
+
+  <p id="result" class="result" role="status" aria-live="polite"></p>
+
+  <section class="schedule-box">
+    <h2 id="schedule-title">Bookings</h2>
+    <ul id="schedule" class="schedule"></ul>
+  </section>
+</main>
+</body>
+</html>
