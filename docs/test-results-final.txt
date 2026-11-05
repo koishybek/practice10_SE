@@ -1,0 +1,33 @@
+
+> smart-campus-room-checker@2.0.0 test
+> node --test --test-reporter=spec
+
+✔ Catalog: at least four rooms, each with id, name, capacity, equipment, blocked status and bookings (5.186535ms)
+✔ F1 boundary: exact capacity is included (20 attendees -> Media Lab 310, capacity 20) (0.315374ms)
+✔ F1 boundary: insufficient capacity is excluded (21 attendees -> Media Lab 310 gone) (0.689197ms)
+✔ F2: room must contain ALL selected equipment (0.158835ms)
+✔ F2: a room with only some of the required equipment is excluded (0.116163ms)
+✔ F1 + F2 combined, and filtering does not mutate the catalog (0.259378ms)
+✔ F3: a blocked room that matches the filters is still not available (0.332668ms)
+✔ F4: no matching rooms returns an empty list (used for the empty state) (0.197439ms)
+✔ F5 / per-room data: the same slot gives different results for different rooms (0.350254ms)
+✔ AC1: end time before start time is rejected (5.612164ms)
+✔ AC1: start time in the past (before fixed 09:00) is rejected (0.302513ms)
+✔ AC1: missing fields are rejected with a clear message (0.283633ms)
+✔ AC2 boundary: exactly 120 minutes is accepted (0.352332ms)
+✔ AC2 boundary: 121 minutes is rejected (0.435417ms)
+✔ AC3 / F3: a blocked room is never reported as available (0.184197ms)
+✔ AC4 boundary: touching intervals are allowed (11:00–12:00 after 10:00–11:00, 09:00–10:00 before it) (0.290138ms)
+✔ AC4 boundary: overlapping intervals are rejected (partial and enclosing) (0.237891ms)
+✔ AC5: checking availability never changes booking data, and the data is frozen (0.945422ms)
+✔ UI: impossible requirements show the empty state (F4) (141.607906ms)
+✔ UI: switching rooms refreshes the availability result (F5) (34.418627ms)
+✔ UI: a selected room that is filtered out is deselected and the result asks for a room (43.541903ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12066.925822
