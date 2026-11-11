@@ -6,9 +6,10 @@
   "description": "Smart Campus Room Availability Checker with a fictional room catalog, filtering and availability rules",
   "scripts": {
     "test": "node --test --test-reporter=spec",
-    "start": "npx --yes http-server -p 8080 -c-1 ."
+    "start": "http-server -p 8080 -c-1 ."
   },
   "devDependencies": {
-    "jsdom": "^24.1.0"
+    "http-server": "14.1.1",
+    "jsdom": "24.1.3"
   }
 }
