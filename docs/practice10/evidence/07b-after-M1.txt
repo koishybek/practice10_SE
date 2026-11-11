@@ -1,0 +1,35 @@
+$ npm test   # AFTER M1
+✔ Catalog: at least four rooms, each with id, name, capacity, equipment, blocked status and bookings (2.771294ms)
+✔ F1 boundary: exact capacity is included (20 attendees -> Media Lab 310, capacity 20) (0.266228ms)
+✔ F1 boundary: insufficient capacity is excluded (21 attendees -> Media Lab 310 gone) (0.785119ms)
+✔ F2: room must contain ALL selected equipment (0.151091ms)
+✔ F2: a room with only some of the required equipment is excluded (0.217415ms)
+✔ F1 + F2 combined, and filtering does not mutate the catalog (0.122933ms)
+✔ F3: a blocked room that matches the filters is still not available (0.420759ms)
+✔ F4: no matching rooms returns an empty list (used for the empty state) (0.101543ms)
+✔ F5 / per-room data: the same slot gives different results for different rooms (0.626304ms)
+✔ R1: non-time strings are rejected, not reported as available (0.995515ms)
+✔ R1: malformed or impossible dates are rejected (0.148726ms)
+✔ R1: out-of-range clock values (25:00, 10:75) are rejected with a format message (1.560357ms)
+✔ R1 guard: valid HH:MM input still behaves exactly as before (AC1/AC2/AC4 unchanged) (0.379894ms)
+✔ AC1: end time before start time is rejected (2.249269ms)
+✔ AC1: start time in the past (before fixed 09:00) is rejected (0.233589ms)
+✔ AC1: missing fields are rejected with a clear message (0.18252ms)
+✔ AC2 boundary: exactly 120 minutes is accepted (0.163475ms)
+✔ AC2 boundary: 121 minutes is rejected (0.194968ms)
+✔ AC3 / F3: a blocked room is never reported as available (0.100391ms)
+✔ AC4 boundary: touching intervals are allowed (11:00–12:00 after 10:00–11:00, 09:00–10:00 before it) (0.258607ms)
+✔ AC4 boundary: overlapping intervals are rejected (partial and enclosing) (0.170315ms)
+✔ AC5: checking availability never changes booking data, and the data is frozen (0.570463ms)
+✔ UI: impossible requirements show the empty state (F4) (139.408815ms)
+✔ UI: switching rooms refreshes the availability result (F5) (113.821376ms)
+✔ UI: a selected room that is filtered out is deselected and the result asks for a room (80.732711ms)
+ℹ tests 25
+ℹ pass 25
+ℹ fail 0
+$ node /tmp/probe.mjs | head -5   # P1 re-probe after M1
+== P1 malformed time/date input (correctness) ==
+validateSlot(date 2026-11-09, "abc"-"11:00")                   {"ok":false,"code":"format","message":"Use a real date (YYYY-MM-DD) and times in HH:MM format."}
+check R-204, "10:30"-"xx" (overlaps lecture if valid)          "invalid"
+check R-204, date "not-a-date" 10:30-11:30                     "invalid"
+check R-204, "10:30"-"25:00" (out-of-range hour)               {"available":false,"status":"invalid","message":"Use a real date (YYYY-MM-DD) and times in HH:MM format.","conflicts":[]}

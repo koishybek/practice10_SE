@@ -8,7 +8,8 @@ Software Engineering, Assignment #04: AI-assisted software evolution, refactorin
 |---|---|
 | `initial/` | Baseline: reconstructed single-room checker (Assignment #03 / Practice #06 equivalent), one file `app.js` |
 | `final/` | Final version: room catalog, capacity/equipment filters, refactored into modules |
-| `final/tests/` | 21 automated tests (AC1–AC5 regression, F1–F5, 3 UI/integration checks) |
+| `final/tests/` | 25 automated tests (AC1–AC5 regression, F1–F5, 3 UI/integration checks, 4 input-validation checks added in Practice #10) |
+| `docs/practice10/` | Practice #10: risk review, risk register, agent-readiness audit, AGENTS.md proposal, evidence |
 | `docs/REPORT.md` | Tasks 1–5: codebase analysis, plan, refactoring diagrams, test evidence, quality comparison |
 | `docs/AI_USE.md` | Task 6 reflection and AI-use record (tool, date, prompts, outputs, problems, verification) |
 | `docs/test-results-*.txt` | Actual output of the test commands |

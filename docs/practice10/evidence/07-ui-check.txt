@@ -1,0 +1,11 @@
+Scripted browser check (Chromium via Playwright, run by the AI assistant)
+[desktop 1280px] conflict -> 'Lecture Hall 204 is busy: overlaps with “Software Engineering lecture” (10:00–11:00).'
+  switch to R-520 -> 'Board Room 520 is available on 2026-11-09, 10:30–11:30.'
+  10:30-12:31 hint -> 'Bookings are limited to 120 minutes.'
+  horizontal overflow: False (scrollWidth=1280)
+  console errors: none
+[mobile 390px] conflict -> 'Lecture Hall 204 is busy: overlaps with “Software Engineering lecture” (10:00–11:00).'
+  switch to R-520 -> 'Board Room 520 is available on 2026-11-09, 10:30–11:30.'
+  10:30-12:31 hint -> 'Bookings are limited to 120 minutes.'
+  horizontal overflow: False (scrollWidth=390)
+  console errors: none

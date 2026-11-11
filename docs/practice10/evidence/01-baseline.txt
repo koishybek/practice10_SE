@@ -1,0 +1,82 @@
+$ git rev-parse --short HEAD
+45001ee
+$ node -v && npm -v
+v22.23.4
+10.9.9
+
+$ ls
+README.md
+docs
+final
+initial
+$ ls AGENTS.md
+ls: cannot access 'AGENTS.md': No such file or directory
+
+$ cd initial && npm test
+
+> smart-campus-room-checker-initial@1.0.0 test
+> node --test --test-reporter=spec
+
+✔ AC1: end before start is rejected (9.799811ms)
+✔ AC1: start in the past is rejected (0.261263ms)
+✔ AC2: exactly 120 minutes is accepted (0.34585ms)
+✔ AC2: 121 minutes is rejected (0.220556ms)
+✔ AC3: blocked room is never available (0.23378ms)
+✔ AC4: touching interval (11:00–12:00 after 10:00–11:00) is allowed (0.209371ms)
+✔ AC4: overlapping interval (10:30–11:30) is rejected (0.207587ms)
+✔ AC5: booking data is not mutated by a check (4.255998ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 204.692287
+
+$ cd final && npm install
+
+added 63 packages in 4s
+$ cd final && npm test
+
+> smart-campus-room-checker@2.0.0 test
+> node --test --test-reporter=spec
+
+✔ Catalog: at least four rooms, each with id, name, capacity, equipment, blocked status and bookings (1.862292ms)
+✔ F1 boundary: exact capacity is included (20 attendees -> Media Lab 310, capacity 20) (0.196649ms)
+✔ F1 boundary: insufficient capacity is excluded (21 attendees -> Media Lab 310 gone) (0.641945ms)
+✔ F2: room must contain ALL selected equipment (0.122057ms)
+✔ F2: a room with only some of the required equipment is excluded (0.138886ms)
+✔ F1 + F2 combined, and filtering does not mutate the catalog (0.085382ms)
+✔ F3: a blocked room that matches the filters is still not available (0.204221ms)
+✔ F4: no matching rooms returns an empty list (used for the empty state) (0.113477ms)
+✔ F5 / per-room data: the same slot gives different results for different rooms (0.315057ms)
+✔ AC1: end time before start time is rejected (1.960151ms)
+✔ AC1: start time in the past (before fixed 09:00) is rejected (0.187059ms)
+✔ AC1: missing fields are rejected with a clear message (0.134889ms)
+✔ AC2 boundary: exactly 120 minutes is accepted (0.123024ms)
+✔ AC2 boundary: 121 minutes is rejected (0.179949ms)
+✔ AC3 / F3: a blocked room is never reported as available (0.155866ms)
+✔ AC4 boundary: touching intervals are allowed (11:00–12:00 after 10:00–11:00, 09:00–10:00 before it) (0.193837ms)
+✔ AC4 boundary: overlapping intervals are rejected (partial and enclosing) (0.09873ms)
+✔ AC5: checking availability never changes booking data, and the data is frozen (0.581767ms)
+✔ UI: impossible requirements show the empty state (F4) (194.231501ms)
+✔ UI: switching rooms refreshes the availability result (F5) (77.970195ms)
+✔ UI: a selected room that is filtered out is deselected and the result asks for a room (56.757026ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1047.086081
+
+$ npm run lint  (final)
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: /home/claude/.npm/_logs/2026-11-11T11_49_25_970Z-debug-0.log
+$ npm run build (final)
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: /home/claude/.npm/_logs/2026-11-11T11_49_26_250Z-debug-0.log

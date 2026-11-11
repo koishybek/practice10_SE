@@ -1,0 +1,24 @@
+diff --git a/.gitignore b/.gitignore
+index 504afef..c2658d7 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,2 +1 @@
+ node_modules/
+-package-lock.json
+diff --git a/final/package.json b/final/package.json
+index 6f28fff..ad55c79 100644
+--- a/final/package.json
++++ b/final/package.json
+@@ -6,9 +6,10 @@
+   "description": "Smart Campus Room Availability Checker with a fictional room catalog, filtering and availability rules",
+   "scripts": {
+     "test": "node --test --test-reporter=spec",
+-    "start": "npx --yes http-server -p 8080 -c-1 ."
++    "start": "http-server -p 8080 -c-1 ."
+   },
+   "devDependencies": {
+-    "jsdom": "^24.1.0"
++    "http-server": "14.1.1",
++    "jsdom": "24.1.3"
+   }
+ }

@@ -1,0 +1,33 @@
+$ npm test   # BEFORE fix: new R1 regression test added, src unchanged
+✔ Catalog: at least four rooms, each with id, name, capacity, equipment, blocked status and bookings (2.116813ms)
+✔ F1 boundary: exact capacity is included (20 attendees -> Media Lab 310, capacity 20) (0.24951ms)
+✔ F1 boundary: insufficient capacity is excluded (21 attendees -> Media Lab 310 gone) (0.732885ms)
+✔ F2: room must contain ALL selected equipment (0.158374ms)
+✔ F2: a room with only some of the required equipment is excluded (0.264536ms)
+✔ F1 + F2 combined, and filtering does not mutate the catalog (0.124804ms)
+✔ F3: a blocked room that matches the filters is still not available (0.255201ms)
+✔ F4: no matching rooms returns an empty list (used for the empty state) (0.091875ms)
+✔ F5 / per-room data: the same slot gives different results for different rooms (0.564522ms)
+✖ R1: non-time strings are rejected, not reported as available (1.616739ms)
+✖ R1: malformed or impossible dates are rejected (0.312541ms)
+✖ R1: out-of-range clock values (25:00, 10:75) are rejected with a format message (1.326636ms)
+✔ R1 guard: valid HH:MM input still behaves exactly as before (AC1/AC2/AC4 unchanged) (0.498743ms)
+✔ AC1: end time before start time is rejected (2.143712ms)
+✔ AC1: start time in the past (before fixed 09:00) is rejected (0.206294ms)
+✔ AC1: missing fields are rejected with a clear message (0.223783ms)
+✔ AC2 boundary: exactly 120 minutes is accepted (0.158763ms)
+✔ AC2 boundary: 121 minutes is rejected (0.197635ms)
+✔ AC3 / F3: a blocked room is never reported as available (0.108273ms)
+✔ AC4 boundary: touching intervals are allowed (11:00–12:00 after 10:00–11:00, 09:00–10:00 before it) (0.232254ms)
+✔ AC4 boundary: overlapping intervals are rejected (partial and enclosing) (0.283345ms)
+✔ AC5: checking availability never changes booking data, and the data is frozen (0.592478ms)
+✔ UI: impossible requirements show the empty state (F4) (93.199944ms)
+✔ UI: switching rooms refreshes the availability result (F5) (99.766447ms)
+✔ UI: a selected room that is filtered out is deselected and the result asks for a room (74.131219ms)
+ℹ tests 25
+ℹ pass 22
+ℹ fail 3
+✖ failing tests:
+✖ R1: non-time strings are rejected, not reported as available (1.616739ms)
+✖ R1: malformed or impossible dates are rejected (0.312541ms)
+✖ R1: out-of-range clock values (25:00, 10:75) are rejected with a format message (1.326636ms)

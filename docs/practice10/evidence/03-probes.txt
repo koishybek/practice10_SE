@@ -1,0 +1,39 @@
+$ node /tmp/probe.mjs
+== P1 malformed time/date input (correctness) ==
+validateSlot(date 2026-11-09, "abc"-"11:00")                   {"ok":true,"start":null,"end":29903700}
+check R-204, "10:30"-"xx" (overlaps lecture if valid)          "available"
+check R-204, date "not-a-date" 10:30-11:30                     "available"
+check R-204, "10:30"-"25:00" (out-of-range hour)               {"available":false,"status":"invalid","message":"Bookings are limited to 120 minutes.","conflicts":[]}
+== P2 attendees edge values ==
+filterRooms attendees -5 -> count                              5
+filterRooms attendees "abc" -> count                           5
+filterRooms attendees 2.5 -> count                             5
+== P3 XSS via booking title (security) ==
+scheduleHtml with <img onerror> title                          "<li>10:00–11:00 &lt;img src=x onerror=alert(1)&gt;</li>"
+== P4 timezone (reliability) ==
+TZ env                                                         "(unset)"
+check R-204 11:00-12:00 touching                               "available"
+== P5 label() with multi-hyphen ids (maintainability) ==
+label("video-conference")                                      "video conference"
+label("smart-board-pro")                                       "smart board-pro"
+
+$ TZ=Pacific/Kiritimati node /tmp/probe.mjs | grep -A2 P4
+== P4 timezone (reliability) ==
+TZ env                                                         "Pacific/Kiritimati"
+check R-204 11:00-12:00 touching                               "available"
+
+$ cat .gitignore
+node_modules/
+package-lock.json
+$ grep -n "jsdom\|start" package.json
+9:    "start": "npx --yes http-server -p 8080 -c-1 ."
+12:    "jsdom": "^24.1.0"
+$ ls package-lock.json && git check-ignore -v package-lock.json
+package-lock.json
+.gitignore:2:package-lock.json	package-lock.json
+
+$ ls ../.github ../AGENTS.md
+ls: cannot access '../.github': No such file or directory
+ls: cannot access '../AGENTS.md': No such file or directory
+$ grep -rn "secret\|token\|password\|api_key\|fetch(" src ../initial/app.js || echo "(no matches)"
+(no matches)

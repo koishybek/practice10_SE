@@ -1,0 +1,31 @@
+# AGENTS.md — Smart Campus Room Availability Checker
+
+Status: PROPOSED by the AI assistant in Practice #10. Not active until approved by the project owner.
+
+## Scope
+- Coursework app: checks availability of FICTIONAL campus rooms against fictional bookings at a fixed time (2026-11-09 09:00).
+- OPEN QUESTION for the owner: the course brief says "one fictional room"; the current catalog has 5 fictional rooms (Assignment #04 extension). Until decided, do not add or remove rooms.
+- Allowed to change: `final/src/**`, `final/tests/**`, `final/css/**`, `final/index.html`, `README.md`, `docs/**`.
+- Do not change without explicit approval: `initial/**` (frozen baseline), `final/package.json`, `final/package-lock.json`, `.gitignore`, this file.
+
+## Hard rules (forbidden actions)
+1. No login, accounts, database, payments, live APIs or real personal data.
+2. No secrets: never add tokens, passwords, API keys or `.env` files; never print environment variables.
+3. No external deployment, publishing or `git push` to `main`; no GitHub Pages, no package publishing.
+4. No new dependencies and no `npx --yes` / downloading tools at run time.
+5. Preserve AC1–AC6. Never delete, skip or weaken an existing test to make a change pass.
+6. No unrelated refactoring: one task = one minimal diff.
+
+## Safe commands
+- `cd initial && npm test` — baseline, expect 8/8.
+- `cd final && npm ci && npm test` — expect all tests to pass (25 at the time of writing).
+- `cd final && npm start` (pinned local http-server) or `python3 -m http.server 8080` — local preview only.
+- Read-only git: `git status`, `git diff`, `git log`.
+
+## Workflow and review gates
+1. Work on an isolated branch or worktree (`agent/<task>`), never on `main`.
+2. Before proposing acceptance, run both test suites and paste the real output. Never report an unexecuted test as passed; list every check that was not run.
+3. Add or update a regression test for every behaviour change.
+4. Update the risk register in `docs/practice10/PRACTICE10.md` when a risk is found, mitigated or rescored.
+5. Hand over: diff summary (files changed and why), test output, open risks.
+6. A human reviews the diff and approves before any merge. The agent never merges.
