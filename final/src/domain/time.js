@@ -8,6 +8,19 @@ export function toMinutes(date, time) {
   return Date.UTC(y, m - 1, d, hh, mm) / 60000;
 }
 
+const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+export const isValidTime = t => TIME_RE.test(t);
+
+/** True only for a real calendar date, so "2026-02-30" is rejected instead of rolling over to March. */
+export function isValidDate(date) {
+  if (!DATE_RE.test(date)) return false;
+  const [y, m, d] = date.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d;
+}
+
 /**
  * Validates a requested slot.
  * @returns {{ok: true, start: number, end: number} | {ok: false, code: string, message: string}}
@@ -15,6 +28,9 @@ export function toMinutes(date, time) {
 export function validateSlot({ date, start, end }, now) {
   if (!date || !start || !end) {
     return { ok: false, code: "incomplete", message: "Choose a date, a start time and an end time." };
+  }
+  if (!isValidDate(date) || !isValidTime(start) || !isValidTime(end)) {
+    return { ok: false, code: "format", message: "Use a real date (YYYY-MM-DD) and times in HH:MM format." };
   }
   const s = toMinutes(date, start);
   const e = toMinutes(date, end);
